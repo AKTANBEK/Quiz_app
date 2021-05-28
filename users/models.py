@@ -6,7 +6,7 @@ from tasks.models import Question
 
 class User(AbstractUser):
     email = models.EmailField()
-    score = models.PositiveIntegerField()
+    score = models.PositiveIntegerField(default=0)
     questions = models.ManyToManyField(Question, related_name='questions')
     completed_test = models.BooleanField(default=False)
 

@@ -15,8 +15,8 @@ class RegisterUserAPIView(generics.CreateAPIView):
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        user_data = serializer.validate_data
-        password = serializer.validate_data.pop('password2')
+        user_data = serializer.validated_data
+        password = serializer.validated_data.pop('password2')
 
         User.objects.create(
             email=user_data['email'],
@@ -30,3 +30,6 @@ class RegisterUserAPIView(generics.CreateAPIView):
 class UserProfileAPIView(generics.RetrieveUpdateAPIView):
     queryset = User.objects.all()
     serializer_class = UserProfileSerializer
+    permission_classes = (permissions.IsAuthenticated,)
+
+

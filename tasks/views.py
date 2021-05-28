@@ -8,7 +8,6 @@ from .serializers import (
 )
 
 
-
 class QuestionAPIView(generics.RetrieveAPIView):
     queryset = Question.objects.all()
     serializer_class = QuestionSerializer
@@ -81,3 +80,4 @@ class AnswerAPIView(generics.RetrieveAPIView):
 class QuestionListAPIView(generics.ListAPIView):
     queryset = Question.objects.all()
     serializer_class = QuestionSerializer
+    permission_classes = (permissions.IsAuthenticated,)
